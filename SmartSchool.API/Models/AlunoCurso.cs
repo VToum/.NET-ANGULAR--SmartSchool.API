@@ -8,7 +8,8 @@ namespace SmartSchool.API.Models
     public class AlunoCurso
     {
         public AlunoCurso() { }
-        public AlunoCurso(int alunoId, int cursoId)
+        public AlunoCurso(int alunoId, 
+                          int cursoId)
         {
             this.AlunoId = alunoId;
             this.CursoId = cursoId;
