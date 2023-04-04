@@ -90,9 +90,7 @@ namespace SmartSchool.API.Data
 
             if (includeProfessor)
             {
-                query = query.Include(p => p.Disciplinas)
-                    .ThenInclude(d => d.AlunoDisciplinas)
-                    .ThenInclude(a => a.Aluno);
+                query = query.Include(p => p.Disciplinas);
             }
             query = query.AsNoTracking().OrderBy(i => i.Id);
 
@@ -106,8 +104,7 @@ namespace SmartSchool.API.Data
             if (includeProfessor)
             {
                 query = query.Include(p => p.Disciplinas)
-                    .ThenInclude(d => d.AlunoDisciplinas)
-                    .ThenInclude(a => a.Aluno);
+                    .ThenInclude(d => d.AlunoDisciplinas);
             }
             query = query.AsNoTracking()
                 .OrderBy(aluno => aluno.Id)
@@ -124,8 +121,7 @@ namespace SmartSchool.API.Data
             if (includeProfessor)
             {
                 query = query.Include(p => p.Disciplinas)
-                    .ThenInclude(d => d.AlunoDisciplinas)
-                    .ThenInclude(a => a.Aluno);
+                    .ThenInclude(d => d.AlunoDisciplinas);
             }
             query = query.AsNoTracking()
                 .OrderBy(a => a.Id)

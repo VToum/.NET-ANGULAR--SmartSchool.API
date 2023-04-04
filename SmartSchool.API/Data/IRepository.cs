@@ -19,7 +19,7 @@ namespace SmartSchool.API.Data
         Aluno GetAlunoId(int alunoId, bool includeDisciplina);
 
         //PROFESSORES
-        Professor[] GetAllProfessores( bool includeDisciplina);
+        Professor[] GetAllProfessores(bool includeDisciplina);
         Professor[] GetProfessorDisciplinaId(int disciplinaId, bool includeProfessor);
         Professor GetProfessorId(int professorId, bool includeDisciplina);
 
