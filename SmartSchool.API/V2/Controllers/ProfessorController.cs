@@ -2,20 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
-using SmartSchool.API.Dtos;
 using SmartSchool.API.Models;
+using SmartSchool.API.V2.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartSchool.API.Controllers
+namespace SmartSchool.API.V2Controllers
 {
     /// <summary>
-    /// 
+    /// Versão 2 <ProfessorController>
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("2.0")]
     public class ProfessorController : ControllerBase
     {
         private readonly IMapper _mapper;

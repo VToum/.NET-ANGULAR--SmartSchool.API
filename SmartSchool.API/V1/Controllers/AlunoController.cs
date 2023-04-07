@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
-using SmartSchool.API.Dtos;
 using SmartSchool.API.Models;
+using SmartSchool.API.V1.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartSchool.API.Controllers
+namespace SmartSchool.API.V1.Controllers
 {
     /// <summary>
-    /// 
+    /// Versão 1 <AlunoController>
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class AlunoController : ControllerBase
     {
         public readonly IRepository _repo;
