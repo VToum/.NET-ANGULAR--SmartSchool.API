@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartSchool.API.V2Controllers
+namespace SmartSchool.API.V2.Controllers
 {
     /// <summary>
     /// Versão 2 <ProfessorController>

@@ -1,4 +1,5 @@
-﻿using SmartSchool.API.Models;
+﻿using SmartSchool.API.Helpers;
+using SmartSchool.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,16 @@ namespace SmartSchool.API.Data
         public bool SaveChanges();
 
         //ALUNOS
-        Aluno[] GetAllAlunos(bool includeDisciplina);
-        Aluno[] GetAlunoDisciplinaId(int disciplinaId, bool includeDisciplina);
-        Aluno GetAlunoId(int alunoId, bool includeDisciplina);
+        Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeDisciplina = false);
+        Aluno[] GetAllAlunos(bool includeDisciplina = false);
+
+        Aluno[] GetAlunoDisciplinaId(int disciplinaId, bool includeDisciplina = false);
+        Aluno GetAlunoId(int alunoId, bool includeDisciplina = false);
 
         //PROFESSORES
-        Professor[] GetAllProfessores(bool includeDisciplina);
-        Professor[] GetProfessorDisciplinaId(int disciplinaId, bool includeProfessor);
-        Professor GetProfessorId(int professorId, bool includeDisciplina);
+        Professor[] GetAllProfessores(bool includeDisciplina = false);
+        Professor[] GetProfessorDisciplinaId(int disciplinaId, bool includeProfessor = false);
+        Professor GetProfessorId(int professorId, bool includeDisciplina = false);
 
     }
 }

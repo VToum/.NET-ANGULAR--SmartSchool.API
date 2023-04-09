@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
+using SmartSchool.API.Helpers;
 using SmartSchool.API.Models;
-using SmartSchool.API.V1.Dtos;
+using SmartSchool.API.V2.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace SmartSchool.API.V1.Controllers
 {
     /// <summary>
-    /// Versão 1 <AlunoController>
+    /// Versão 2 <AlunoController>
     /// </summary>
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -38,22 +39,12 @@ namespace SmartSchool.API.V1.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromQuery]PageParams pageParams)
         {
-            var alunos =_repo.GetAllAlunos(true);
+            var alunos = await _repo.GetAllAlunosAsync(pageParams, true);
 
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
-        }
 
-        /// <summary>
-        ///  Método responsável para retornar apenas um unico AlunoDTO.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("getRegistro")]
-        public IActionResult GetRegistro()
-        {
-
-            return Ok(new AlunoRegistrarDto());
         }
 
         /// <summary>
@@ -72,6 +63,7 @@ namespace SmartSchool.API.V1.Controllers
 
 
             return Ok(alunoDto);
+
         }
         /// <summary>
         /// Método responsável para Adicionar um aluno.
@@ -90,6 +82,7 @@ namespace SmartSchool.API.V1.Controllers
             }
 
             return BadRequest("Aluno não foi Adicionado");
+
         }
 
         /// <summary>
@@ -112,7 +105,8 @@ namespace SmartSchool.API.V1.Controllers
             {
                 return Created($"/api/aluno{model.Id}", _mapper.Map<AlunoDto>(aluno));
             }
-            return BadRequest("Aluno não foi Atualizado");          
+            return BadRequest("Aluno não foi Atualizado");  
+            
         }
 
         /// <summary>
@@ -136,6 +130,7 @@ namespace SmartSchool.API.V1.Controllers
 
             }
             return BadRequest("Aluno não foi Atualizado");
+
         }
 
         /// <summary>
@@ -156,6 +151,7 @@ namespace SmartSchool.API.V1.Controllers
                 return Ok("Aluno removido com sucesso");
             }
             return BadRequest("Aluno não foi Removido");
+
         }
     }
 }

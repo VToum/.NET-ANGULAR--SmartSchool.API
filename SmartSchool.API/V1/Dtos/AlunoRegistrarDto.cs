@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartSchool.API.V1.Dtos
-{ 
+{
     public class AlunoRegistrarDto
     {
         public int Id { get; set; }

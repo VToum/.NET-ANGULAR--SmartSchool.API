@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartSchool.API.Helpers;
 using SmartSchool.API.Models;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,45 @@ namespace SmartSchool.API.Data
             return query.ToArray();
         }
 
+        public async Task<PageList<Aluno>> GetAllAlunosAsync(
+            PageParams pageParams,
+            bool includeDisciplina = false)
+        {
+            IQueryable<Aluno> query = _context.Alunos;
+
+            if (includeDisciplina)
+            {
+                query = query.Include(ad => ad.alunoDisciplinas)
+                    .ThenInclude(d => d.Disciplina)
+                    .ThenInclude(p => p.Professor);
+            }
+
+            query = query.AsNoTracking().OrderBy(i => i.Id);
+
+            if (!string.IsNullOrEmpty(pageParams.Nome))
+            {
+                query = query.Where(aluno => aluno.Nome
+                    .ToUpper()
+                    .Contains(pageParams.Nome.ToUpper()) ||
+                    aluno.Sobrenome
+                    .ToUpper()
+                    .Contains(pageParams.Nome.ToUpper()));
+            }
+
+            if (pageParams.Matricula > 0)
+            {
+                query = query.Where(aluno => aluno.Matricula == pageParams.Matricula);
+            }
+
+            if (pageParams.Ativo != null)
+            {
+                query = query.Where(aluno => aluno.Ativo == (pageParams.Ativo != 0));
+            }
+
+            return await PageList<Aluno>.CreateAsync(query, pageParams.PegaNumero, pageParams.TamanhoPage);
+
+        }
+
         public Aluno[] GetAlunoDisciplinaId(int disciplinaId, bool includeAluno = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
@@ -64,6 +104,7 @@ namespace SmartSchool.API.Data
                 .Where(aluno => aluno.alunoDisciplinas.Any(ad => ad.DisciplinaId == disciplinaId));
 
             return query.ToArray();
+
         }
 
         public Aluno GetAlunoId(int alunoId, bool includeProfessor)
@@ -82,6 +123,7 @@ namespace SmartSchool.API.Data
                 .Where(aluno => aluno.Id == alunoId);
 
             return query.FirstOrDefault();
+
         }
 
         public Professor[] GetAllProfessores(bool includeProfessor = false)
@@ -95,6 +137,7 @@ namespace SmartSchool.API.Data
             query = query.AsNoTracking().OrderBy(i => i.Id);
 
             return query.ToArray();
+
         }
 
         public Professor[] GetProfessorDisciplinaId(int disciplinaId, bool includeProfessor)
@@ -112,6 +155,7 @@ namespace SmartSchool.API.Data
                     d => d.AlunoDisciplinas.Any(ad => ad.DisciplinaId == disciplinaId)));
 
             return query.ToArray();
+
         }
 
         public Professor GetProfessorId(int professorId, bool includeProfessor = false)
@@ -128,6 +172,7 @@ namespace SmartSchool.API.Data
                 .Where(professor => professor.Id == professorId);
 
             return query.FirstOrDefault();
+
         }
     }
 }
