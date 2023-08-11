@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AlunosComponent } from './components/alunos/alunos.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { ProfessoresComponent } from './components/professores/professores.component';
-import { NavComponent } from './components/shared/nav/nav.component';
-import { TituloComponent } from './components/shared/titulo/titulo.component';
-// import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AlunosComponent } from './Components/alunos/alunos.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { PerfilComponent } from './Components/perfil/perfil.component';
+import { ProfessoresComponent } from './Components/professores/professores.component';
+import { NavComponent } from './Components/shared/nav/nav.component';
+import { TituloComponent } from './Components/shared/titulo/titulo.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +20,13 @@ import { TituloComponent } from './components/shared/titulo/titulo.component';
     PerfilComponent,
     ProfessoresComponent,
     NavComponent,
-    TituloComponent
+    TituloComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // NgxSpinnerModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 3500,
       positionClass: 'toast-bottom-right',
@@ -34,7 +34,6 @@ import { TituloComponent } from './components/shared/titulo/titulo.component';
       progressBar: true,
       closeButton: true
     })
-
   ],
   providers: [],
   bootstrap: [AppComponent]
